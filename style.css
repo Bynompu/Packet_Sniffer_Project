@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: #0d1117; 
+}
+
+.log-table th, .log-table td, .history-table th, .history-table td { 
+    padding: 8px 12px; text-align: left; font-size: 0.8rem; 
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; 
+}
+.log-table thead, .history-table thead { 
+    background-color: #161b22; position: sticky; top: 0; 
+}
+.log-table tbody tr, .history-table tbody tr { cursor: pointer; }
+.log-table tbody tr:nth-child(even), .history-table tbody tr:nth-child(even) { background-color: #1a1f26; }
+.log-table tbody tr:hover, .history-table tbody tr:hover { background-color: #2c323a; }
+
+/* MODIFIED: Increased max-height for longer lists before scrolling */
+.scrollable-table-container {
+    max-height: 350px; /* Increased from 40vh */
+    overflow-y: auto;
+    background-color: #21262d;
+    padding: 0; /* Padding will be on the inner table */
+    border-radius: 0.5rem;
+    border: 1px solid #30363d;
+}
+
+/* NEW: Make the headers inside the scrollable container sticky */
+.scrollable-table-container .discovery-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10; /* Ensures header stays on top of scrolling content */
+}
+
+
+.proto-tcp, .proto-udp, .proto-icmp { color: #34d399; }
+.proto-dns { color: #F59E0B; }
+.proto-wlan { color: #6366F1; }
+.proto-arp { color: #EC4899; }
+.proto-http, .proto-tls { color: #3B82F6; }
+
+.discovery-table th, .discovery-table td { 
+    padding: 12px; text-align: left; border-bottom: 1px solid #30363d; font-size: 0.9rem; 
+}
+/* NEW: Give the sticky header a solid background */
+.discovery-table th {
+    background-color: #161b22;
+}
+
+.status-dot { 
+    height: 10px; width: 10px; background-color: #f87171; border-radius: 50%; 
+    display: inline-block; margin-right: 8px; transition: background-color: 0.5s; 
+}
+.status-dot.connected { background-color: #34d399; }
+.status-dot.capturing { background-color: #F59E0B; }
+.modal-overlay { 
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); 
+    display: flex; align-items: center; justify-content: center; z-index: 1000; 
+}
+.modal-content { 
+    background-color: #161b22; padding: 20px; border-radius: 8px; border: 1px solid #30363d; 
+    width: 90%; max-width: 800px; max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+}
+.modal-header { 
+    display: flex; justify-content: space-between; align-items: center; 
+    border-bottom: 1px solid #30363d; padding-bottom: 10px; margin-bottom: 15px; 
+}
+.modal-header h2 { color: #c9d1d9; font-size: 1.25rem; }
+.modal-close-button { background: none; border: none; color: #8b949e; font-size: 1.5rem; cursor: pointer; }
+.packet-detail-tree details { margin-left: 15px; border-left: 1px solid #30363d; padding-left: 15px; margin-bottom: 5px; }
+.packet-detail-tree summary { cursor: pointer; font-weight: bold; color: #58a6ff; }
+.packet-detail-tree .field { display: flex; font-size: 0.8rem; color: #c9d1d9; }
+.packet-detail-tree .field-key { color: #8b949e; margin-right: 10px; min-width: 150px; }
+.payload-hexdump { font-family: monospace; white-space: pre; color: #c9d1d9; font-size: 0.75rem; line-height: 1.4; background-color: #0d1117; padding: 10px; border-radius: 4px; overflow-x: auto; }
