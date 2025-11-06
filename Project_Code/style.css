@@ -1,0 +1,192 @@
+/* =======================================================================
+   GLOBAL STYLES AND FONT IMPORTS
+   ======================================================================= */
+
+/* Import the 'Inter' font family from Google Fonts for a modern, clean look. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+/* Basic styles applied to the entire page. */
+body { 
+    font-family: 'Inter', sans-serif; /* Use the imported Inter font. */
+    background-color: #0d1117; /* A very dark blue, almost black, background. */
+}
+
+/* =======================================================================
+   TABLE STYLES - LIVE CAPTURE & HISTORY
+   ======================================================================= */
+
+/* General styling for table cells in the main log and history tables. */
+.log-table th, .log-table td, .history-table th, .history-table td { 
+    padding: 8px 12px;
+    text-align: left; 
+    font-size: 0.8rem;
+    white-space: nowrap;      /* Prevent text from wrapping to the next line. */
+    overflow: hidden;         /* Hide any content that overflows the cell. */
+    text-overflow: ellipsis;  /* Show '...' for overflowing text. */
+}
+
+/* Styles the header of the main tables to be "sticky". */
+.log-table thead, .history-table thead { 
+    background-color: #161b22; /* A slightly lighter dark blue. */
+    position: sticky;         /* This makes the header stick to the top of its container when scrolling. */
+    top: 0; 
+}
+
+/* Make table rows clickable. */
+.log-table tbody tr, .history-table tbody tr { 
+    cursor: pointer; 
+}
+
+/* Applies "zebra striping" to table rows for better readability. */
+.log-table tbody tr:nth-child(even), .history-table tbody tr:nth-child(even) { 
+    background-color: #1a1f26; 
+}
+
+/* Highlight a row when the user hovers over it. */
+.log-table tbody tr:hover, .history-table tbody tr:hover { 
+    background-color: #2c323a; 
+}
+
+/* =======================================================================
+   SCROLLABLE & DISCOVERY TABLE STYLES
+   ======================================================================= */
+
+/* Defines a container for the Wireless Environment tables that will scroll vertically. */
+.scrollable-table-container {
+    max-height: 350px;      /* Set a fixed maximum height before scrolling starts. */
+    overflow-y: auto;       /* Enable vertical scrolling. */
+    background-color: #21262d;
+    padding: 0;             /* Remove padding as the inner table will have it. */
+    border-radius: 0.5rem;
+    border: 1px solid #30363d;
+}
+
+/* Makes the header of the tables INSIDE the scrollable container sticky. */
+.scrollable-table-container .discovery-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;            /* Ensures the header stays on top of the scrolling rows. */
+}
+
+/* General styles for the less-dense tables used on the Wireless and Analysis pages. */
+.discovery-table th, .discovery-table td { 
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #30363d;
+    font-size: 0.9rem; 
+}
+
+/* Gives the sticky header a solid background to hide scrolling content underneath. */
+.discovery-table th {
+    background-color: #161b22;
+}
+
+/* =======================================================================
+   PROTOCOL-SPECIFIC COLORING
+   ======================================================================= */
+
+/* These classes are applied by JavaScript to color-code protocols for quick visual scanning. */
+.proto-tcp, .proto-udp, .proto-icmp { color: #34d399; } /* Green for standard transport protocols */
+.proto-dns { color: #F59E0B; }                       /* Yellow for DNS */
+.proto-wlan { color: #6366F1; }                      /* Indigo for Wi-Fi frames */
+.proto-arp { color: #EC4899; }                       /* Pink for ARP */
+.proto-http, .proto-tls { color: #3B82F6; }          /* Blue for common web protocols */
+
+/* =======================================================================
+   UI WIDGETS AND INDICATORS
+   ======================================================================= */
+
+/* Styles for the connection status indicator dot in the header. */
+.status-dot { 
+    height: 10px;
+    width: 10px;
+    background-color: #f87171; /* Default to red (Disconnected). */
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    transition: background-color 0.5s; /* Smooth color change. */
+}
+.status-dot.connected { background-color: #34d399; } /* Green for Connected. */
+.status-dot.capturing { background-color: #F59E0B; } /* Yellow for Capturing. */
+
+/* =======================================================================
+   MODAL (POP-UP) STYLES
+   ======================================================================= */
+
+/* A full-screen, semi-transparent overlay to dim the background. */
+.modal-overlay { 
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensure it's on top of everything else. */
+}
+
+/* The main content box for the modal. */
+.modal-content { 
+    background-color: #161b22;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh; /* Limit height to 80% of the viewport. */
+    overflow-y: auto;  /* Make the modal's content scrollable if it's too long. */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Styles for the header section of the modal. */
+.modal-header { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+.modal-header h2 { color: #c9d1d9; font-size: 1.25rem; }
+.modal-close-button { background: none; border: none; color: #8b949e; font-size: 1.5rem; cursor: pointer; }
+
+/* =======================================================================
+   PACKET DETAIL TREE VIEW STYLES
+   ======================================================================= */
+
+/* Styles for the collapsible tree view inside the packet detail modal. */
+.packet-detail-tree details { 
+    margin-left: 15px;
+    border-left: 1px solid #30363d;
+    padding-left: 15px;
+    margin-bottom: 5px;
+}
+.packet-detail-tree summary { 
+    cursor: pointer;
+    font-weight: bold;
+    color: #58a6ff; /* Blue for the protocol layer name (e.g., TCP, IP). */
+}
+
+/* Styles for a single key-value pair in the tree view. */
+.packet-detail-tree .field { 
+    display: flex;
+    font-size: 0.8rem;
+    color: #c9d1d9;
+}
+.packet-detail-tree .field-key { 
+    color: #8b949e;      /* A dimmer color for the field name. */
+    margin-right: 10px;
+    min-width: 150px;     /* Aligns the values vertically. */
+}
+
+/* Styles for the raw payload hexdump at the bottom of the modal. */
+.payload-hexdump { 
+    font-family: monospace; /* Use a monospaced font for alignment. */
+    white-space: pre;       /* Preserve whitespace and line breaks. */
+    color: #c9d1d9;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    background-color: #0d1117;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;       /* Allow horizontal scrolling for long lines. */
+}
